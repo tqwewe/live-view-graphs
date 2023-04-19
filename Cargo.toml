@@ -7,17 +7,20 @@ edition = "2021"
 
 [dependencies]
 lunatic = "0.12.1"
-plotters = { version = "0.3.4", default-features = false, features = [
-        "svg_backend",
-        "chrono",
-        "image",
-        "deprecated_items",  "all_series", "all_elements",
-        "full_palette"
-] }
 rand = "0.8.5"
 rand_distr = "0.4.3"
 rand_xorshift = "0.3.0"
-# plotters = { git = "https://github.com/bkolobara/plotters", branch = "master" }
 serde = { version = "1.0.160", features = ["derive"] }
 submillisecond = "0.3.0"
 submillisecond-live-view = "0.4.0"
+
+[dependencies.plotters]
+version = "0.3.4"
+default-features = false
+features = [
+  "svg_backend",
+  "chrono",
+  "image",
+  "deprecated_items",  "all_series", "all_elements",
+  "full_palette"
+]

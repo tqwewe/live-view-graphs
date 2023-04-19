@@ -1,4 +1,4 @@
-use std::{iter::Filter, time::Duration};
+use std::time::Duration;
 
 use lunatic::spawn_link;
 use plotters::prelude::*;
@@ -9,12 +9,11 @@ use serde::{Deserialize, Serialize};
 use submillisecond::{router, Application};
 use submillisecond_live_view::{maud_live_view::PreEscaped, prelude::*};
 
-type SampleIter = Filter<DistIter<Normal<f64>, XorShiftRng, f64>, fn(&f64) -> bool>;
+type SampleIter = DistIter<Normal<f64>, XorShiftRng, f64>;
 
 fn main() -> std::io::Result<()> {
     Application::new(router! {
         "/" => Chart::handler("index.html", "#app")
-        // "/static" => static_router!("./static")
     })
     .serve("127.0.0.1:3000")
 }
@@ -32,8 +31,7 @@ impl LiveView for Chart {
     fn mount(_uri: Uri, socket: Option<Socket>) -> Self {
         let norm_dist = Normal::new(500.0, 100.0).unwrap();
         let x_rand = XorShiftRng::from_seed(*b"MyFragileSeed123");
-        let sample_filter = (|x: &f64| *x < 1500.0) as fn(&f64) -> bool;
-        let x_iter = norm_dist.sample_iter(x_rand).filter(sample_filter);
+        let x_iter = norm_dist.sample_iter(x_rand);
 
         Chart {
             data: Vec::new(),

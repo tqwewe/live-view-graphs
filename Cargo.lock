@@ -1621,8 +1621,6 @@ dependencies = [
 [[package]]
 name = "submillisecond-live-view"
 version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b55c0d8c1cfe53ef2bc6125e8c7a36ee7dea91d5f7ffa8368f0c4a6b51e78302"
 dependencies = [
  "base64 0.13.1",
  "const-random",
